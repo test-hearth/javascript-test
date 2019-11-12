@@ -1,173 +1,48 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>TABLEのタイトル固定</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
-  <script src="main.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="./src/main.js"></script>
+  <title>Document</title>
 </head>
 <body>
-  <div id="base">
-    <div>
-      <!-- ⇊ Dummy Table Left Header ⇊ -->
-      <div id="title">
-        <table>
-          <thead>
-            <tr>
-              <th>不動１</th>
-            </tr>
-          </thead>
-        </table>
-      </div>
-
-      <!-- ⇊ Dummy Table Right Headers ⇊ -->
-      <div id="titles">
-        <table>
-          <thead>
-            <tr>
-              <th>上下不動１</th>
-              <th>上下不動２</th>
-              <th>上下不動３</th>
-              <th>上下不動４</th>
-            </tr>
-          </thead>
-        </table>
-      </div>
-
-      <!-- ⇊ Dummy Table Left Columns ⇊ -->
-      <div id="leftCols">
-        <table>
-          <tbody>
-            <tr>
-              <td>左右不動１</td>
-            </tr>
-            <tr>
-              <td>左右不動２</td>
-            </tr>
-            <tr>
-              <td>左右不動３</td>
-            </tr>
-            <tr>
-              <td>左右不動４</td>
-            </tr>
-            <tr>
-              <td>左右不動５</td>
-            </tr>
-            <tr>
-              <td>左右不動６</td>
-            </tr>
-            <tr>
-              <td>左右不動７</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- ⇊ Dummy Table Left Footer  ⇊ -->
-      <div id="leftFoot">
-        <table>
-          <tfoot>
-            <tr>
-              <th>不動</th>
-            </tr>
-          </tfoot>
-        </table>
-      </div>
-
-      <!-- ⇊ Dummy Table Right Footers ⇊ -->
-      <div id="foots">
-        <table>
-          <tfoot>
-            <tr>
-              <th>上下不動５</th>
-              <th>上下不動６</th>
-              <th>上下不動７</th>
-              <th>上下不動８</th>
-            </tr>
-          </tfoot>
-        </table>
-      </div>
-    </div>
-
-    <!-- Main Table -->
-    <div id="container">
-      <table>
-        <thead>
-          <tr>
-            <th>本物不動１</th>
-            <th>本物上下不動１</th>
-            <th>本物上下不動２</th>
-            <th>本物上下不動３</th>
-            <th>本物上下不動４</th>
-          </tr>
-        </thead>
-        <tfoot>
-          <tr>
-            <th>本物不動２</th>
-            <th>本物上下不動５</th>
-            <th>本物上下不動６</th>
-            <th>本物上下不動７</th>
-            <th>本物上下不動８</th>
-          </tr>
-          <tr>
-            <td>ページング</td>
-          </tr>
-        </tfoot>
-        <tbody>
-          <tr>
-            <td>中身01</td>
-            <td>中身02</td>
-            <td>中身03</td>
-            <td>中身04</td>
-            <td>中身05</td>
-          </tr>
-          <tr>
-            <td>中身06</td>
-            <td>中身07</td>
-            <td>中身08</td>
-            <td>中身09</td>
-            <td>中身10</td>
-          </tr>
-          <tr>
-            <td>中身11</td>
-            <td>中身12</td>
-            <td>中身13</td>
-            <td>中身14</td>
-            <td>中身15</td>
-          </tr>
-          <tr>
-            <td>中身16</td>
-            <td>中身17</td>
-            <td>中身18</td>
-            <td>中身19</td>
-            <td>中身20</td>
-          </tr>
-          <tr>
-            <td>中身21</td>
-            <td>中身22</td>
-            <td>中身23</td>
-            <td>中身24</td>
-            <td>中身25</td>
-          </tr>
-          <tr>
-            <td>中身26</td>
-            <td>中身27</td>
-            <td>中身28</td>
-            <td>中身29</td>
-            <td>中身30</td>
-          </tr>
-          <tr>
-            <td>中身31</td>
-            <td>中身32</td>
-            <td>中身33</td>
-            <td>中身34</td>
-            <td>中身35</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+  <div>
+    <button onclick="getList(['aaaaa', 'bbbbbbbb', 'test', 'practice'])">ENDPOINT GET METHOD</button>
+    <button onclick="getList(['queryStrings', 'TEST'])">QUERY GET METHOD</button>
+    <button onclick="getList('falkfjalkdfjlaksdfjl')">API GET METHOD Error</button>
   </div>
+  <div>
+    <button onclick="getErrorBody()">
+      Error Body
+    </button>
+  </div>
+<script>
+
+function getErrorBody() {
+  console.log('axios Start');
+  axios({
+    method: 'get',
+    url: 'https://jsonplaceholder.typicode.com/todos/90001',
+    timeout: 500,
+    validateStatus: (status) => {
+      return status < 500;
+    }
+  })
+  .then((response) => {
+    // console.log(response.data);
+    console.log('response => [res]', { status: response.status})
+  })
+  .catch((err) => {
+    console.log('axios Error => [Error]', err.response.status);
+  });
+  // .finaly((res) => console.log('finaly', res));
+  // .finaly(res => {
+  //   console.log('finaly')
+  // });
+}
+</script>
 </body>
 </html>
